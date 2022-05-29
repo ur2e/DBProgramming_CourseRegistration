@@ -100,7 +100,7 @@ if (rs == null) {
                 <td class="list-col"><%=c_prof%></td>
                 <td class="list-col"><%=c_grade%></td>
                 <td class="list-col"><%=c_credit%></td>
-                <td class="list-col"><a href="delete_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>&c_name=<%=c_name%>">
+                <td class="list-col"><a href="delete_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>">
                 <button>취소</button></a></td>
             </tr>
             <% }} %>

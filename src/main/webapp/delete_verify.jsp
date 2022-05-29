@@ -9,8 +9,23 @@
 <%
 int s_id = Integer.parseInt(request.getParameter("s_id"));
 int c_id = Integer.parseInt(request.getParameter("c_id"));
-String c_name = request.getParameter("c_name");
 
+/**
+ * DELETE_ENROLL(IN s_id, IN c_id, OUT c_name);
+ */
+
+CallableStatement cstmt = null;
+String mySQL = null;
+
+mySQL = "{call DELETE_ENROLL(?,?,?)}";
+cstmt = myConn.prepareCall(mySQL);
+cstmt.setInt(1,s_id);
+cstmt.setInt(2,c_id);
+cstmt.registerOutParameter(3, java.sql.Types.VARCHAR);	
+cstmt.execute();
+String result = cstmt.getString(3);
+
+/* SQL문으로 
 PreparedStatement pstmt = null;
 String mySQL = null;
 ResultSet rs = null;
@@ -20,10 +35,11 @@ pstmt = myConn.prepareStatement(mySQL);
 pstmt.setInt(1, s_id); 
 pstmt.setInt(2, c_id); 
 rs = pstmt.executeQuery();
+*/
 %>
 
 <script>
-    alert(`해당 과목의 수강신청을 취소하였습니다.`);
+    alert(`<%=result%> 과목의 수강신청을 취소하였습니다.`);
 	location.href="delete.jsp";
 </script>
 
