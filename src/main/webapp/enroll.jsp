@@ -93,7 +93,7 @@ else
 		else if(c_time == 4) timeString = "13:30 ~ 14:45";
 		else if(c_time == 5) timeString = "15:00 ~ 16:15";
 		else if(c_time == 6) timeString = "16:30 ~ 17:45";
-		else dayString = "18:00 ~ 17:30";
+		else timeString = "18:00 ~ 17:30";
 
 		
 %>
