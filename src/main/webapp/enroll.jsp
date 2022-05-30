@@ -5,11 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head> <meta charset="EUC-KR">
-<%@ include file="top.jsp" %>
+<%-- <%@ include file="top.jsp" %>
 
 <% 
-if(session_id == null) 
-	{
+if(session_id == null) {
 %>
 <script language=javascript>
   alert("로그인을 먼저 해주세요");
@@ -17,7 +16,7 @@ if(session_id == null)
 </script>
 <%
 }
-%>
+%> --%>
 
 <title>수강신청 조회</title> </head>
 
