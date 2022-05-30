@@ -40,7 +40,7 @@ rs = pstmt.executeQuery();
 
 <script>
     alert(`<%=result%> 과목의 수강신청을 취소하였습니다.`);
-	location.href="delete.jsp";
+	location.href="enroll.jsp";
 </script>
 
 </body>
