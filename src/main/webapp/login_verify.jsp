@@ -16,7 +16,7 @@ mySQL = "select s_id from students where s_id=" + userID + " and s_pwd='" + user
 ResultSet rs = stmt.executeQuery(mySQL);
 */
 
-sql = "SELECT s_id FROM students where s_id=? and s_pwd=?";
+sql = "SELECT s_id, s_name FROM students where s_id=? and s_pwd=?";
 pstmt = myConn.prepareStatement(sql);
 pstmt.setString(1, userID); 
 pstmt.setString(2, userPassword);
@@ -24,7 +24,9 @@ ResultSet rs = pstmt.executeQuery();
 
 if (rs.next()) {
    String login_id = rs.getString("s_id");
+   String login_name = rs.getString("s_name");
    session.setAttribute("id", login_id);
+   session.setAttribute("name", login_name);
    response.sendRedirect("main.jsp");
 } else {
 %>
