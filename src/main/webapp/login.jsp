@@ -7,12 +7,14 @@ charset=UTF-8" pageEncoding="UTF-8"%>
     <title>수강신청 시스템 로그인</title>
     <style>
         @font-face {
-            font-family: 'Maplestory';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+            font-family: 'GmarketSansBold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
         body {
             background-color: #f3f3f3;
-            font-family: 'Maplestory';
+            font-family: 'GmarketSansBold';
             align-items: center;
             align-content: center;
         }
@@ -46,7 +48,7 @@ charset=UTF-8" pageEncoding="UTF-8"%>
             margin: 4px 20px;
             cursor: pointer;
             height: 100px;
-            font-family: 'Maplestory';
+            font-family: 'GmarketSansBold';
             font-size: 18px;
         }
         .outer-box {
@@ -78,7 +80,7 @@ charset=UTF-8" pageEncoding="UTF-8"%>
                     </div>
                 </div>
             </form>
-            <div align=left style="margin-top: 10px; margin-bottom: 20px; color: grey; font-size: 11px;">
+            <div align=left  style="margin-top: 10px; margin-bottom: 20px; color: grey; font-size: 10px;">
                 초기 비밀번호 : 대문자 SM + 생년월일yymmdd+! (예: SMyymmdd!)
             </div>
             <br>
