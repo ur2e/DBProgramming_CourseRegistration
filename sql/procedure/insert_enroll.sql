@@ -9,16 +9,16 @@ IS
     v_year NUMBER;
     v_sem NUMBER;
     v_course COURSE%ROWTYPE;
-    v_state VARCHAR2(10) := '¹ÌÁ¤';
+    v_state VARCHAR2(10) := 'ë¯¸ì •';
     
-    MAX_CREDIT = -- ÃÖ´ë ¼ö°­ °¡´É ÇÐÁ¡
+    MAX_CREDIT = -- ìµœëŒ€ ìˆ˜ê°• ê°€ëŠ¥ í•™ì 
     nTotalCredit NUMBER := 0;
     nDup NUMBER;
     nTime NUMBER;
 BEGIN
 	result := '';
 	
-	/* ³âµµ, ÇÐ±â */
+	/* ë…„ë„, í•™ê¸° */
 	v_year := Date2EnrollYear(SYSDATE);
 	v_sem := Date2EnrollSemester(SYSDATE);
 	
@@ -28,7 +28,7 @@ BEGIN
     FROM COURSE
     WHERE c_id = 21003994 and c_no = 1;
  
-    /* ¿¡·¯1: ÃÖ´ëÇÐÁ¡ ÃÊ°ú¿©ºÎ */
+    /* ì—ëŸ¬1: ìµœëŒ€í•™ì  ì´ˆê³¼ì—¬ë¶€ */
     SELECT SUM(c_credit)
     INTO nTotalCredit
     FROM ENROLL
@@ -38,7 +38,7 @@ BEGIN
     	RAISE MAX_CREDIT_EXCEPT;
     END IF
     
-    /* ¿¡·¯2: µ¿ÀÏÇÑ °ú¸ñ ½ÅÃ» ¿©ºÎ */
+    /* ì—ëŸ¬2: ë™ì¼í•œ ê³¼ëª© ì‹ ì²­ ì—¬ë¶€ */
     SELECT COUNT(*)
     INTO nDup
     FROM ENROLL
@@ -48,7 +48,7 @@ BEGIN
     	RAISE DUP_COURSE_EXCEPT;
     END IF;
     
-    /* ¿¡·¯3: ½Ã°£ Áßº¹ ¿©ºÎ */
+    /* ì—ëŸ¬3: ì‹œê°„ ì¤‘ë³µ ì—¬ë¶€ */
     SELECT COUNT(*)
     INTO nTime
     FROM ENROLL
@@ -58,7 +58,7 @@ BEGIN
     	RAISE DUP_TIME_EXCEPT;
     END IF;
     
-    /* Á¤»ó µ¿ÀÛ */
+    /* ì •ìƒ ë™ìž‘ */
     v_course.c_spare := v_course.c_spare-1;
    	IF ( v_course.c_spare < 0) THEN
    		v_course.c_spare := 0;
@@ -67,15 +67,15 @@ BEGIN
     						v_course.c_grade, v_course.c_credit, v_course.c_max, v_course.c_crnt+1, v_course.c_spare, v_course.c_prof,
     						v_year, v_sem, v_state);
     COMMIT;
-    result := '¼ö°­½ÅÃ» µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.';
+    result := 'ìˆ˜ê°•ì‹ ì²­ ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.';
 
 EXCEPTION
 	WHEN MAX_CREDIT_EXCEPT THEN
-		result := 'ÃÖ´ë ÇÐÁ¡À» ÃÊ°úÇÏ¿´½À´Ï´Ù.';
+		result := 'ìµœëŒ€ í•™ì ì„ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.';
     WHEN DUP_COURSE_EXCEPT THEN
-    	reuslt := 'ÀÌ¹Ì µî·ÏµÈ °ú¸ñÀ» ½ÅÃ»ÇÏ¿´½À´Ï´Ù';
+    	reuslt := 'ì´ë¯¸ ë“±ë¡ëœ ê³¼ëª©ì„ ì‹ ì²­í•˜ì˜€ìŠµë‹ˆë‹¤';
     WHEN DUP_TIME_EXCEPT THEN 
-    	result := 'ÀÌ¹Ì µî·ÏµÈ °ú¸ñ Áß Áßº¹µÇ´Â ½Ã°£ÀÌ Á¸ÀçÇÕ´Ï´Ù';
+    	result := 'ì´ë¯¸ ë“±ë¡ëœ ê³¼ëª© ì¤‘ ì¤‘ë³µë˜ëŠ” ì‹œê°„ì´ ì¡´ìž¬í•©ë‹ˆë‹¤';
     WHEN OTHERS THEN
     	result := SQLCODE;
 END;
