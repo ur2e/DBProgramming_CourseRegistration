@@ -4,8 +4,8 @@
 
 <!DOCTYPE html>
 <html>
-<head> <meta charset="EUC-KR">
-<%-- <%@ include file="top.jsp" %>
+<head> 
+<%-- <%@ include file="top.jsp" %>  --%>
 
 <% 
 if(session_id == null) {
@@ -16,7 +16,7 @@ if(session_id == null) {
 </script>
 <%
 }
-%> --%>
+%>
 
 <title>수강신청 조회</title> </head>
 
