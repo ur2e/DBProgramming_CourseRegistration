@@ -6,10 +6,11 @@ CREATE OR REPLACE PROCEDURE RANKING
     CURSOR final_student IS ( SELECT c_name, c_id, c_no, e.s_id, s_name, RANK() OVER (PARTITION BY c_id, c_no ORDER BY s.s_grade desc, s.last_credit desc, s.last_score desc) RANK
                               FROM ENROLL e , STUDENTS s 
                               WHERE e.s_id = s.s_id
-                              RDER BY c_name, rank;;
+                              ORDER BY c_name, rank;
     )
 IS
-
+    -- 각 과목별 max 정원
+    v_c_max  NUMBER(3);
 BEGIN
     OPEN final_student;
         
