@@ -6,19 +6,23 @@ CREATE OR REPLACE PROCEDURE INSERT_ENROLL
     result OUT VARCHAR2
 )
 IS
+	MAX_CREDIT_EXCEPT EXCEPTION;
+    DUP_COURSE_EXCEPT EXCEPTION;
+    DUP_TIME_EXCEPT EXCEPTION;
+    
     v_year NUMBER;
     v_sem NUMBER;
     v_course COURSE%ROWTYPE;
-    v_state VARCHAR2(10) := '¹ÌÁ¤';
+    v_state VARCHAR2(10) := 'ë¯¸ì •';
     
-    MAX_CREDIT = -- ÃÖ´ë ¼ö°­ °¡´É ÇĞÁ¡
+    MAX_CREDIT NUMBER := 19; -- ìµœëŒ€ ìˆ˜ê°• ê°€ëŠ¥ í•™ì 
     nTotalCredit NUMBER := 0;
     nDup NUMBER;
     nTime NUMBER;
 BEGIN
 	result := '';
 	
-	/* ³âµµ, ÇĞ±â */
+	/* ë…„ë„, í•™ê¸° */
 	v_year := Date2EnrollYear(SYSDATE);
 	v_sem := Date2EnrollSemester(SYSDATE);
 	
@@ -28,38 +32,38 @@ BEGIN
     FROM COURSE
     WHERE c_id = 21003994 and c_no = 1;
  
-    /* ¿¡·¯1: ÃÖ´ëÇĞÁ¡ ÃÊ°ú¿©ºÎ */
+    /* ì—ëŸ¬1: ìµœëŒ€í•™ì  ì´ˆê³¼ì—¬ë¶€ */
     SELECT SUM(c_credit)
     INTO nTotalCredit
     FROM ENROLL
-    WHERE s_id = USER_S_ID and e_year = v_year and e_sem = v_sem ;
+    WHERE s_id = USER_S_ID and e_year = v_year and e_semester = v_sem ;
      
     IF (nTotalCredit + v_course.c_credit > MAX_CREDIT) THEN
     	RAISE MAX_CREDIT_EXCEPT;
-    END IF
+    END IF;
     
-    /* ¿¡·¯2: µ¿ÀÏÇÑ °ú¸ñ ½ÅÃ» ¿©ºÎ */
+    /* ì—ëŸ¬2: ë™ì¼í•œ ê³¼ëª© ì‹ ì²­ ì—¬ë¶€ */
     SELECT COUNT(*)
     INTO nDup
     FROM ENROLL
-    WHERE s_id = USER_S_ID and e_year = v_year and e_sem = v_sem and c_id=USER_C_ID and c_no=USER_C_NO;
+    WHERE s_id = USER_S_ID and e_year = v_year and e_semester = v_sem and c_id=USER_C_ID and c_no=USER_C_NO;
     
     IF (nDup > 0) THEN
     	RAISE DUP_COURSE_EXCEPT;
     END IF;
     
-    /* ¿¡·¯3: ½Ã°£ Áßº¹ ¿©ºÎ */
+    /* ì—ëŸ¬3: ì‹œê°„ ì¤‘ë³µ ì—¬ë¶€ */
     SELECT COUNT(*)
     INTO nTime
     FROM ENROLL
-    WHERE s_id = USER_S_ID and e_year = v_year and e_sem = v_sem and c_day=v_course.c_day and c_time=v_course.c_time;
+    WHERE s_id = USER_S_ID and e_year = v_year and e_semester = v_sem and c_day=v_course.c_day and c_time=v_course.c_time;
     
     IF (nTime > 0) THEN
     	RAISE DUP_TIME_EXCEPT;
     END IF;
     
-    /* Á¤»ó µ¿ÀÛ */
-   	/* enroll »ğÀÔ */
+    /* ì •ìƒ ë™ì‘ */
+   	/* enroll ì‚½ì… */
     INSERT INTO ENROLL VALUES (USER_S_ID, v_course.c_id, v_course.c_no, v_course.c_name, v_course.c_credit, v_course.c_prof,
     						v_course.c_time, v_course.c_day, v_course.c_grade, v_year, v_sem, v_state);
     						
@@ -67,21 +71,21 @@ BEGIN
    	IF ( v_course.c_spare < 0) THEN
    		v_course.c_spare := 0;
    	END IF;				
-    /* course ¾÷µ¥ÀÌÆ® */
+    /* course ì—…ë°ì´íŠ¸ */
    	INSERT INTO COURSE VALUES (v_course.c_id, v_course.c_no, v_course.c_name, v_course.c_time, v_course.c_day, 
     						v_course.c_grade, v_course.c_credit, v_course.c_max, v_course.c_crnt+1, v_course.c_spare, v_course.c_prof);
    	
    	
     COMMIT;
-    result := '¼ö°­½ÅÃ» µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.';
+    result := 'ìˆ˜ê°•ì‹ ì²­ ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.';
 
 EXCEPTION
 	WHEN MAX_CREDIT_EXCEPT THEN
-		result := 'ÃÖ´ë ÇĞÁ¡À» ÃÊ°úÇÏ¿´½À´Ï´Ù.';
+		result := 'ìµœëŒ€ í•™ì ì„ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.';
     WHEN DUP_COURSE_EXCEPT THEN
-    	reuslt := 'ÀÌ¹Ì µî·ÏµÈ °ú¸ñÀ» ½ÅÃ»ÇÏ¿´½À´Ï´Ù';
+    	result := 'ì´ë¯¸ ë“±ë¡ëœ ê³¼ëª©ì„ ì‹ ì²­í•˜ì˜€ìŠµë‹ˆë‹¤';
     WHEN DUP_TIME_EXCEPT THEN 
-    	result := 'ÀÌ¹Ì µî·ÏµÈ °ú¸ñ Áß Áßº¹µÇ´Â ½Ã°£ÀÌ Á¸ÀçÇÕ´Ï´Ù';
+    	result := 'ì´ë¯¸ ë“±ë¡ëœ ê³¼ëª© ì¤‘ ì¤‘ë³µë˜ëŠ” ì‹œê°„ì´ ì¡´ì¬í•©ë‹ˆë‹¤';
     WHEN OTHERS THEN
     	result := SQLCODE;
 END;
