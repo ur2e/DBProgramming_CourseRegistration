@@ -1,8 +1,5 @@
 CREATE OR REPLACE PROCEDURE RANKING
 (
-    TYPE s_id_table IS TABLE OF enroll.s_id%TYPE INDEX BY BINARY_INTEGER;
-    TYPE c_id_table IS TABLE OF enroll.c_id%TYPE INDEX BY BINARY_INTEGER;
-
     CURSOR final_student IS 
     (   
         SELECT *
@@ -19,10 +16,8 @@ IS
 BEGIN
     OPEN final_student;    
     LOOP 
-
         UPDATE ENROLL
         SET e_state = '확정';
-
         EXIT WHEN final_student%NOTFOUND;
     END LOOP;
 
