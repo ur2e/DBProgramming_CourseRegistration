@@ -30,70 +30,53 @@ BEGIN
     INTO v_course.c_id, v_course.c_no, v_course.c_name, v_course.c_time, v_course.c_day, 
     v_course.c_grade, v_course.c_credit, v_course.c_max, v_course.c_crnt, v_course.c_spare, v_course.c_prof 
     FROM COURSE
-    WHERE c_id = USER_C_ID and c_no = USER_C_NO;
-    
-    dbms_output.put_line('1번 정상 동작');
-    
+    WHERE c_id = 21003994 and c_no = 1;
  
     /* 에러1: 최대학점 초과여부 */
     SELECT SUM(c_credit)
     INTO nTotalCredit
     FROM ENROLL
     WHERE s_id = USER_S_ID and e_year = v_year and e_sem = v_sem ;
-    dbms_output.put_line('2번 정상 동작');
      
     IF (nTotalCredit + v_course.c_credit > MAX_CREDIT) THEN
     	RAISE MAX_CREDIT_EXCEPT;
     END IF;
-    dbms_output.put_line('에러1 정상 동작');
     
     /* 에러2: 동일한 과목 신청 여부 */
-    SELECT NVL(COUNT(*), 0)
+    SELECT COUNT(*)
     INTO nDup
     FROM ENROLL
     WHERE s_id = USER_S_ID and e_year = v_year and e_sem = v_sem and c_id=USER_C_ID and c_no=USER_C_NO;
     
-    dbms_output.put_line('3번 정상 동작');
-    
     IF (nDup > 0) THEN
     	RAISE DUP_COURSE_EXCEPT;
     END IF;
-    dbms_output.put_line('에러2 정상 동작');
     
     /* 에러3: 시간 중복 여부 */
-    SELECT NVL(COUNT(*), 0)
+    SELECT COUNT(*)
     INTO nTime
     FROM ENROLL
     WHERE s_id = USER_S_ID and e_year = v_year and e_sem = v_sem and c_day=v_course.c_day and c_time=v_course.c_time;
-    dbms_output.put_line('4번 정상 동작');
     
     IF (nTime > 0) THEN
     	RAISE DUP_TIME_EXCEPT;
     END IF;
-    dbms_output.put_line('애러3 정상 동작');
-    
     
     /* 정상 동작 */
    	/* enroll 삽입 */
     INSERT INTO ENROLL VALUES (USER_S_ID, v_course.c_id, v_course.c_no, v_course.c_name, v_course.c_credit, v_course.c_prof,
     						v_course.c_time, v_course.c_day, v_course.c_grade, v_year, v_sem, v_state);
-    
-    dbms_output.put_line('INSERT1 정상 동작');
-    
+    						
     v_course.c_spare := v_course.c_spare-1;
    	IF ( v_course.c_spare < 0) THEN
    		v_course.c_spare := 0;
-   	END IF;		
-   	dbms_output.put_line('if 문 정상 동작');
-   	
+   	END IF;				
     /* course 업데이트 */
-   	v_course.c_crnt := v_course.c_crnt + 1;
-   	UPDATE COURSE 
-    SET c_crnt = v_course.c_crnt, c_spare = v_course.c_spare
-   	WHERE c_id = v_course.c_id and c_no = v_course.c_no; 
+   	INSERT INTO COURSE VALUES (v_course.c_id, v_course.c_no, v_course.c_name, v_course.c_time, v_course.c_day, 
+    						v_course.c_grade, v_course.c_credit, v_course.c_max, v_course.c_crnt+1, v_course.c_spare, v_course.c_prof);
    	
-   	dbms_output.put_line('UPDATE 정상 동작');
    	
+    COMMIT;
     result := '수강신청 등록이 완료되었습니다.';
 
 EXCEPTION
@@ -104,6 +87,6 @@ EXCEPTION
     WHEN DUP_TIME_EXCEPT THEN 
     	result := '이미 등록된 과목 중 중복되는 시간이 존재합니다';
     WHEN OTHERS THEN
-    	result := '실행 에러';
+    	result := SQLCODE;
 END;
 /
