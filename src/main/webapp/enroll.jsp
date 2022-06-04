@@ -4,54 +4,43 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<%-- <%@ include file="top.jsp" %>
 
-<% 
+<%
+String session_id = (String) session.getAttribute("id");
 if(session_id == null) {
 %>
-<script language=javascript>
-  alert("로그인을 먼저 해주세요");
-  location.href = "login.jsp";
-</script>
+   <script language=javascript>
+      alert("enroll 접근 불가, 로그인을 먼저 해주세요");
+      location.href = "login.jsp";
+   </script>
 <%
 }
-%> --%>
-<title>수강신청 조회</title> </head>
+%> 
 <head>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 
-<!-- 나중에 여기 main으로 옮기기 -->
-<!-- 나중에 여기 main으로 옮기기 -->
-<jsp:include page='student_info.jsp'/>
-<br><br>
-<!-- 나중에 여기 main으로 옮기기 -->
-<!-- 나중에 여기 main으로 옮기기 -->
-
 <div class="content-box" id="enroll">
    <div class="content-title">수강신청내역</div>
    <hr>
 
-
-<table width="75%" align="center" bgcolor="#FFFF99" border>
-<tr>
-   <td align="center"><b>과목번호</b></td>
-   <td align="center"><b>과목명</b></td>
-   <td align="center"><b>분반</b></td>
-   <td align="center"><b>학점</b></td>
-   <td align="center"><b>담당 교수</b></td>
-   <td align="center"><b>강의 요일</b></td>
-   <td align="center"><b>강의 시간</b></td>
-   <td align="center"><b>해당 년도</b></td>
-   <td align="center"><b>해당 학기</b></td>
-   <%-- <td align="center"><b>수강신청상태</b></td> --%>
-</tr>
+   <table align="center" width="90%" class="enroll_table">
+   <tr>
+      <td class="enroll_h"><b>과목번호</b></td>
+      <td class="enroll_h"><b>과목명</b></td>
+      <td class="enroll_h"><b>분반</b></td>
+      <td class="enroll_h"><b>학점</b></td>
+      <td class="enroll_h"><b>담당 교수</b></td>
+      <td class="enroll_h"><b>강의 요일</b></td>
+      <td class="enroll_h"><b>강의 시간</b></td>
+      <td class="enroll_h"><b>해당 년도</b></td>
+      <td class="enroll_h"><b>해당 학기</b></td>
+      <%-- <td align="center"><b>수강신청상태</b></td> --%>
+   </tr>
 
 
 <%
-Statement stmt = null;
 PreparedStatement pstmt = null;
 String sql = null;
 ResultSet resultSet = null;
@@ -64,21 +53,16 @@ pstmt = myConn.prepareStatement(sql);
 pstmt.setInt(1, s_id); 
 resultSet = pstmt.executeQuery();
 
-if(resultSet == null) 
+if(!resultSet.isBeforeFirst()) 
 {
    System.out.println("pass7");
 %>
+   <tr>
+      <td class="enroll_content" colspan=10>
+         <img src="../image/warning.jfif" height="15px"> 해당 테이블에 데이터가 없습니다.
+      </td>
+   </tr>
 
-<tr>
-<td colspan=10>
-   <div> 해당 테이블에 데이터가 없습니다. </div>
-</td>
-</tr>
-
-<%-- <script>
-  alert("수강신청한 과목이 없습니다. 수강신청을 해주세요.");
-  location.href = "main.jsp";
-</script> --%>
 <% 
 } 
 else
@@ -113,16 +97,16 @@ else
       
 %>
 <tr bgcolor="#FFFFFF">
-      <td><%=c_id%></td>
-      <td><%=c_name%></td>
-      <td><%=c_no%></td>
-      <td><%=c_credit%></td>
-      <td><%=c_prof%></td>
-      <td><%=dayString %></td>
-      <td><%=timeString%></td>
-      <td><%=e_year%></td>
-      <td><%=e_sem%></td>
-      <td><a href="delete_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>">
+      <td class="enroll_content"><%=c_id%></td>
+      <td class="enroll_content"><%=c_name%></td>
+      <td class="enroll_content"><%=c_no%></td>
+      <td class="enroll_content"><%=c_credit%></td>
+      <td class="enroll_content"><%=c_prof%></td>
+      <td class="enroll_content"><%=dayString %></td>
+      <td class="enroll_content"><%=timeString%></td>
+      <td class="enroll_content"><%=e_year%></td>
+      <td class="enroll_content"><%=e_sem%></td>
+      <td class="enroll_content"><a href="delete_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>">
                 <button>취소</button></a></td>
 </tr>
 <% 
@@ -132,7 +116,7 @@ else
 </table> 
 </div>
 <br><br>
-	<jsp:include page='insert.jsp'/>
+
 </body> 
 
 </html>

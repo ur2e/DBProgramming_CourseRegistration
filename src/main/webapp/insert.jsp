@@ -13,24 +13,29 @@
 	if (session_id==null) response.sendRedirect("login.jsp"); 
 %>
 
-	<table width="75%" align="center" bgcolor="#FFFF99" border>
-		<thead>
-			<tr>
-				<td align="center"><b>과목번호</b></td>
-				<td align="center"><b>분반</b></td>
-				<td align="center"><b>과목명</b></td>
-				<td align="center"><b>담당 교수</b></td>
-				<td align="center"><b>강의 요일</b></td>
-				<td align="center"><b>강의 시간</b></td>
-				<td align="center"><b>이수단계</b></td>
-				<td align="center"><b>학점</b></td>
-				<td align="center"><b>정원</b></td>
-				<td align="center"><b>신청</b></td>
-				<td align="center"><b>여석</b></td>
-				<td align="center"><b>신청</b></td>
-			</tr>
-		</thead>
-	
+    <div class="content-box" id="course">
+        <div class="content-title">개설과목조회</div>
+
+        <hr>
+
+		<table width="90%" align="center"  class="enroll_table">
+			<thead>
+				<tr>
+					<td class="enroll_h"><b>과목번호</b></td>
+					<td class="enroll_h"><b>분반</b></td>
+					<td class="enroll_h"><b>과목명</b></td>
+					<td class="enroll_h"><b>담당 교수</b></td>
+					<td class="enroll_h"><b>강의 요일</b></td>
+					<td class="enroll_h"><b>강의 시간</b></td>
+					<td class="enroll_h"><b>이수단계</b></td>
+					<td class="enroll_h"><b>학점</b></td>
+					<td class="enroll_h"><b>정원</b></td>
+					<td class="enroll_h"><b>신청</b></td>
+					<td class="enroll_h"><b>여석</b></td>
+					<td class="enroll_h"><b>신청</b></td>
+				</tr>
+			</thead>
+		
 <%-- 
 <table class="course-list">
       <thead>
@@ -117,18 +122,18 @@
 			else timeString = "18:00 ~ 17:30";
 	%>
 		<tr bgcolor="#FFFFFF">
-			<td><%=c_id%></td>
-            <td><%=c_no%></td>
-            <td><%=c_name%></td>
-            <td><%=c_prof%></td>
-            <td><%=dayString%></td>
-            <td><%=timeString%></td>
-            <td><%=c_grade%></td>
-            <td><%=c_credit%></td>
-            <td><%=c_max%></td>
-            <td><%=c_crnt%></td>
-            <td><%=c_spare%></td>
-            <td><a href="insert_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>&c_no=<%=c_no%>">
+			<td class="enroll_content"><%=c_id%></td>
+            <td class="enroll_content"><%=c_no%></td>
+            <td class="enroll_content"><%=c_name%></td>
+            <td class="enroll_content"><%=c_prof%></td>
+            <td class="enroll_content"><%=dayString%></td>
+            <td class="enroll_content"><%=timeString%></td>
+            <td class="enroll_content"><%=c_grade%></td>
+            <td class="enroll_content"><%=c_credit%></td>
+            <td class="enroll_content"><%=c_max%></td>
+            <td class="enroll_content"><%=c_crnt%></td>
+            <td class="enroll_content"><%=c_spare%></td>
+            <td class="enroll_content"><a href="insert_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>&c_no=<%=c_no%>">
             <button>신청</button></a></td>
 		</tr>
 	</tbody>
@@ -143,5 +148,6 @@
    %>
 
     </table>
+	</div>
 </body>
 </html>
