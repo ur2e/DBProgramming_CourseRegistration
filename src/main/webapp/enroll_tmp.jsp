@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head> 
-<%@ include file="top.jsp" %>
+
 
 <% 
 if(session_id == null) {

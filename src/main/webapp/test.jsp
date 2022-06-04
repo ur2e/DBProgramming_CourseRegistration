@@ -4,7 +4,6 @@
 
 <%
 
-
 CallableStatement cstmt = null;
 String mySQL = null;
 

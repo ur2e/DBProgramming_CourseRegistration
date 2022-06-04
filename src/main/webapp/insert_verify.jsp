@@ -29,7 +29,7 @@
 	%>
 	<script>
 		alert("<%= result %>");
-		location.href = "enroll.jsp";
+		location.href = "main.jsp";
 	</script>
 	
 	<%
