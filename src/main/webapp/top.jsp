@@ -22,9 +22,9 @@ String user_name = (String) session.getAttribute("name");
 <body>
     <header>
         <div style="display:flex"><img class="top-img" src="./image/top-logo.JPG"> 
-            <h4 align="left"><a class="back-main" href=main.jsp>숙명수강신청시스템</a></h4></div>
+            <h4 align="left"><a class="back-main" href=main.jsp><span class="user-name" style="color:white">숙명수강신청시스템</span></a></h4></div>
         <nav>
-          <span class="user-name" style="color:white"><%=user_name%></span> <span>님 접속을 환영합니다.</span> <span> | </span>
+          <span class="user-name" style="color:white"><%=user_name%></span><span>님 접속을 환영합니다.</span> <span> | </span>
           <a href="update.jsp"><span>비밀번호변경</span> <span> | </span>
           <span><%=log%></span>
         </nav>
