@@ -88,7 +88,7 @@ if(rs.next()) {
                         수강가능학점:
                     </td>
                     <td>
-                        <div class="student-content">18</div>
+                        <div class="student-content">19</div>
                     </td>
                 </tr>
             </tbody>
