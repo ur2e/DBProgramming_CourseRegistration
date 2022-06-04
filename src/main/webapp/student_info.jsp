@@ -11,6 +11,29 @@
 
 </head>
 
+<%
+String session_id = (String) session.getAttribute("id");
+PreparedStatement pstmt = null;
+String mySQL = null;
+ResultSet rs = null;
+
+int s_id = Integer.parseInt(session_id);
+mySQL = "SELECT s_id, s_major, s_name, s_grade, last_credit, last_score FROM students WHERE s_id=?";
+
+pstmt = myConn.prepareStatement(mySQL);
+pstmt.setInt(1, s_id); 
+rs = pstmt.executeQuery();
+
+if(rs.next()) {
+    int student_id = rs.getInt("s_id");
+    String s_major = rs.getString("s_major");
+    String s_name = rs.getString("s_name");
+    int s_grade = rs.getInt("s_grade");
+    int last_credit = rs.getInt("last_credit");
+    float last_score = rs.getFloat("last_score");
+
+%>
+
 <body>
     <div align="outer-box" class="outer-box">
         <div class="top-box">학부 수강신청</div>
@@ -27,25 +50,25 @@
                         학번:
                     </td>
                     <td>
-                        <div class="student-content">181111</div>
+                        <div class="student-content"><%=student_id%></div>
                     </td>
                     <td class="student-title">
                         성명:
                     </td>
                     <td>
-                        <div class="student-content">지유리</div>
+                        <div class="student-content"><%=s_name%></div>
                     </td>
                     <td class="student-title">
                         전공:
                     </td>
                     <td>
-                        <div class="student-content">소프트웨어융합전공</div>
+                        <div class="student-content"><%=s_major%></div>
                     </td>
                     <td class="student-title">
                         학년:
                     </td>
                     <td>
-                        <div class="student-content">4</div>
+                        <div class="student-content"><%=s_grade%></div>
                     </td>
                 </tr>
                 <tr>
@@ -53,13 +76,13 @@
                         직전학기 이수학점:
                     </td>
                     <td>
-                        <div class="student-content">18</div>
+                        <div class="student-content"><%=last_credit%></div>
                     </td>
                     <td class="student-title">
                         직전학기 성적:
                     </td>
                     <td>
-                        <div class="student-content">18</div>
+                        <div class="student-content"><%=last_score%></div>
                     </td>
                     <td class="student-title">
                         수강가능학점:
@@ -71,4 +94,6 @@
             </tbody>
         </table>
     </div>
+
+    <% } %>
 </body>
