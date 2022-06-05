@@ -25,17 +25,6 @@ cstmt.registerOutParameter(3, java.sql.Types.VARCHAR);
 cstmt.execute();
 String result = cstmt.getString(3);
 
-/* SQL문으로 
-PreparedStatement pstmt = null;
-String mySQL = null;
-ResultSet rs = null;
-
-mySQL = "DELETE FROM enroll WHERE s_id=? and c_id=?";
-pstmt = myConn.prepareStatement(mySQL);
-pstmt.setInt(1, s_id); 
-pstmt.setInt(2, c_id); 
-rs = pstmt.executeQuery();
-*/
 %>
 
 <script>

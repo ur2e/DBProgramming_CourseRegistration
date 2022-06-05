@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    background-color: #f3f3f3;
+    align-items: center;
+    align-content: center;
+}
+.outer-box {
+    margin-top: 60px;
+    padding-left: 2px;
+}
+.top-box {
+    background-color: #dddddd;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+ 
+.content-box {
+    background-color: white;
+    margin-bottom: 10px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-bottom: 7px;
+}
+
+.content-title {
+    font-weight: bold;
+    margin-bottom: -4px;
+
+}
+
+hr {
+    background-color: #487bb9;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(197, 197, 197);
+    font-size: 14px;
+  } 
+
+
+.student-table .student-title {
+    text-align: right;
+    margin-left: 10px;
+    width: 140px;
+}
+
+.student-table .student-content {
+    background-color: #eff7fb;
+    border: 1px solid #b3b3b3;
+    width: 150px;
+    text-align: right;
+    padding-right: 7px;
+}
+
+.enroll_table, tr, td {
+    border-collapse : collapse;
+}
+
+.enroll_table .enroll_h {
+    border: 1px solid hsl(0, 0%, 71%);
+    border-collapse : collapse;
+    background-color:#ececec;
+}
+
+.enroll_content {
+    border: 1px solid hsl(0, 0%, 71%);    
+}
