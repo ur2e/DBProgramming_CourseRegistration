@@ -4,6 +4,7 @@
 <head>
 <title>데이터베이스를 활용한 수강신청 시스템입니다.</title> </head>
 <body>
+<jsp:include page='student_info.jsp'/>
 <%@include file="top.jsp"%>
 <jsp:include page='student_info.jsp'/>
 <jsp:include page='enroll.jsp'/>
@@ -17,4 +18,6 @@
 <% } else { %>
 <tr> <td align="center">로그인한 후 사용하세요.</td> </tr>
 <% } %>
-</table> </body> </html>
+</table> 
+
+</body> </html>

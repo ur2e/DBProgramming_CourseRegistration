@@ -16,7 +16,6 @@
 	 */
 	CallableStatement cstmt = null;
 	String result = null;
-	
 	cstmt = myConn.prepareCall("{call INSERT_ENROLL(?,?,?,?)}");
 	cstmt.setInt(1,s_id);
 	cstmt.setInt(2,c_id);

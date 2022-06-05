@@ -21,7 +21,7 @@ int s_id = Integer.parseInt(session_id);
 mySQL = "SELECT s_id, s_major, s_name, s_grade, last_credit, last_score FROM students WHERE s_id=?";
 
 pstmt = myConn.prepareStatement(mySQL);
-pstmt.setInt(1, s_id); 
+pstmt.setInt(1, s_id);
 rs = pstmt.executeQuery();
 
 if(rs.next()) {
@@ -42,7 +42,7 @@ if(rs.next()) {
     <div class="content-box" id="student_info">
         <div class="content-title">학생기본정보</div>
         <hr>
-        
+
         <table align="center" class="student-table">
             <tbody>
                 <tr>
@@ -88,7 +88,7 @@ if(rs.next()) {
                         수강가능학점:
                     </td>
                     <td>
-                        <div class="student-content">19</div>
+                        <div class="student-content">18</div>
                     </td>
                 </tr>
             </tbody>
