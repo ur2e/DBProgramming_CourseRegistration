@@ -36,8 +36,9 @@ body {
 
 }
 
-hr {
+.content-box hr {
     background-color: #487bb9;
+    height: 1px;
 }
 
 a {
@@ -67,7 +68,6 @@ a {
 
 .enroll_table .enroll_h {
     border: 1px solid hsl(0, 0%, 71%);
-    border-collapse : collapse;
     background-color:#ececec;
 }
 
@@ -75,3 +75,76 @@ a {
     border: 1px solid hsl(0, 0%, 71%);    
 }
 .enroll_record:hover { background-color: rgba(194, 233, 255, 0.5);}
+
+
+/* update.jsp*/
+.outer {
+    text-align: center;
+}
+
+.update-box {
+    padding-top: 20px;
+    background-color: white;
+    width: 70%;
+    display: inline-block;
+}
+
+.update-box span{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+.update-box hr{
+    background-color: #487bb9;
+    height: 3px;
+}
+
+.update-table, tr, td {
+    border-collapse : collapse;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+.update-table .update-id {
+    margin-left: 5px;
+}
+
+.update-table .update-pwd {
+    margin-left: 5px;
+}
+
+.update-table .update-title {
+    text-align: center;
+    font-weight: bold;
+    background-color: #f1f1f6;
+}
+
+.update-table .update-submit {
+    border: 2px solid black;  
+}
+
+.update-btn {
+    border: 1px solid #487bb9;
+    color: white;
+    background-color: #487bb9;
+    padding: 5px;
+    height: 30px;
+}
+
+.update-btn:hover {
+    background-color: white;
+    color: #487bb9;
+}
+
+.cancel-btn {
+    border: 1px solid #a0a9b4;
+    color: white;
+    background-color: #a0a9b4;
+    padding: 5px;
+    height: 30px;
+}
+
+.cancel-btn:hover {
+    background-color: #a0a9b4cb;
+}
