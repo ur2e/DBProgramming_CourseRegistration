@@ -72,3 +72,4 @@ a {
 .enroll_content {
     border: 1px solid hsl(0, 0%, 71%);    
 }
+.enroll_record:hover { background-color: rgba(194, 233, 255, 0.5);}
