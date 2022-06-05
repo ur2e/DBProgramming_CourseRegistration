@@ -127,5 +127,6 @@
    %>
 
     </table>
+	</div>
 </body>
 </html>

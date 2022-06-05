@@ -6,7 +6,8 @@
 <body>
 <jsp:include page='student_info.jsp'/>
 <%@include file="top.jsp"%>
-<%@include file="enroll.jsp"%>
+<jsp:include page='student_info.jsp'/>
+<jsp:include page='enroll.jsp'/>
 <jsp:include page='insert.jsp'/>
 <table width="75%" align="center" height="100%">
 <!-- 로그인에 안된 사용자는 로그인 페이지로 클릭을 유도함 
