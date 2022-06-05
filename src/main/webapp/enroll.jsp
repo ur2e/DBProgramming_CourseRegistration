@@ -36,6 +36,7 @@ if(session_id == null) {
       <td class="enroll_h"><b>강의 시간</b></td>
       <td class="enroll_h"><b>해당 년도</b></td>
       <td class="enroll_h"><b>해당 학기</b></td>
+      <td class="enroll_h"><b>신청 취소</b></td>
       <%-- <td align="center"><b>수강신청상태</b></td> --%>
    </tr>
 
