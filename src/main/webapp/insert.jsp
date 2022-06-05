@@ -18,7 +18,7 @@
 
         <hr>
 
-         <table width="90%" align="center"  class="enroll_table">
+         <table width="95%" align="center"  class="enroll_table">
             <thead>
                <tr>
                   <td class="enroll_h"><b>과목번호</b></td>

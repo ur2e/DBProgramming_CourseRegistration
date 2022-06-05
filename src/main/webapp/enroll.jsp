@@ -25,7 +25,7 @@ if(session_id == null) {
    <div class="content-title">수강신청내역</div>
    <hr>
 
-   <table align="center" width="90%" class="enroll_table">
+   <table align="center" width="95%" class="enroll_table">
    <tr>
       <td class="enroll_h"><b>과목번호</b></td>
       <td class="enroll_h"><b>과목명</b></td>
