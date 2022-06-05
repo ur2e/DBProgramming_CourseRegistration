@@ -10,12 +10,6 @@ String sql = null;
 String userID=request.getParameter("userID");
 String userPassword=request.getParameter("userPassword");
 
-/*
-stmt = myConn.createStatement();
-mySQL = "select s_id from students where s_id=" + userID + " and s_pwd='" + userPwd + "'";
-ResultSet rs = stmt.executeQuery(mySQL);
-*/
-
 sql = "SELECT s_id, s_name FROM students where s_id=? and s_pwd=?";
 pstmt = myConn.prepareStatement(sql);
 pstmt.setString(1, userID); 

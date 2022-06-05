@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+   <meta charset="UTF-8">
 </head>
 <body>
 <% 
@@ -18,25 +18,25 @@
 
         <hr>
 
-		<table width="90%" align="center"  class="enroll_table">
-			<thead>
-				<tr>
-					<td class="enroll_h"><b>과목번호</b></td>
-					<td class="enroll_h"><b>분반</b></td>
-					<td class="enroll_h"><b>과목명</b></td>
-					<td class="enroll_h"><b>담당 교수</b></td>
-					<td class="enroll_h"><b>강의 요일</b></td>
-					<td class="enroll_h"><b>강의 시간</b></td>
-					<td class="enroll_h"><b>이수단계</b></td>
-					<td class="enroll_h"><b>학점</b></td>
-					<td class="enroll_h"><b>정원</b></td>
-					<td class="enroll_h"><b>신청</b></td>
-					<td class="enroll_h"><b>여석</b></td>
-					<td class="enroll_h"><b>신청</b></td>
-				</tr>
-			</thead>
+         <table width="90%" align="center"  class="enroll_table">
+            <thead>
+               <tr>
+                  <td class="enroll_h"><b>과목번호</b></td>
+                  <td class="enroll_h"><b>분반</b></td>
+                  <td class="enroll_h"><b>과목명</b></td>
+                  <td class="enroll_h"><b>담당 교수</b></td>
+                  <td class="enroll_h"><b>강의 요일</b></td>
+                  <td class="enroll_h"><b>강의 시간</b></td>
+                  <td class="enroll_h"><b>이수단계</b></td>
+                  <td class="enroll_h"><b>학점</b></td>
+                  <td class="enroll_h"><b>정원</b></td>
+                  <td class="enroll_h"><b>신청</b></td>
+                  <td class="enroll_h"><b>여석</b></td>
+                  <td class="enroll_h"><b>신청</b></td>
+               </tr>
+            </thead>
 
-      <tbody>
+         <tbody>
 <%
    CallableStatement cstmt1 = null;
    CallableStatement cstmt2 = null;
@@ -100,7 +100,7 @@
          else timeString = "18:00 ~ 17:30";
          
    %>
-      <tr bgcolor="#FFFFFF">
+      <tr class="enroll_record" bgcolor="#FFFFFF">
 			<td class="enroll_content"><%=c_id%></td>
             <td class="enroll_content"><%=c_no%></td>
             <td class="enroll_content"><%=c_name%></td>
