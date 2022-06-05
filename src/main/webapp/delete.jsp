@@ -6,106 +6,110 @@
 <html>
 
 <head>
-    <title>delete 테스트 페이지</title>
-    <style type="text/css">
-        .course-list {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-
-        .course-list td {
-            border-color: black;
-            border-style: solid;
-            border-width: 1px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
-
-        .course-list th {
-            border-color: black;
-            border-style: solid;
-            border-width: 1px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            overflow: hidden;
-            padding: 10px 5px;
-            word-break: normal;
-        }
-
-        .course-list .list-col {
-            border-color: inherit;
-            text-align: left;
-            vertical-align: top
-        }
-    </style>
+   <meta charset="UTF-8">
+    <title>delete</title>
 </head>
 
 <body>
-
 <% 
-String session_id = (String) session.getAttribute("id");
-if (session_id==null) response.sendRedirect("login.jsp"); %>
-
-
-    <table class="course-list">
-        <thead>
-            <tr>
-                <th class="list-col">과목번호 c_id</th>
-                <th class="list-col">분반 c_no</th>
-                <th class="list-col">과목명 c_name</th>
-                <th class="list-col">강의시간 c_time,c_day</th>
-                <th class="list-col">담당교수 c_prof</th>
-                <th class="list-col">이수단계 c_grade</th>
-                <th class="list-col">학점 c_credit</th>
-                <th class="list-col">신청취소</th>
-            </tr>
-        </thead>
-        <tbody>
-<%
-Statement stmt = null;
-PreparedStatement pstmt = null;
-String mySQL = null;
-ResultSet rs = null;
-
-int s_id = Integer.parseInt(session_id);
-mySQL = "SELECT c_id, c_no, c_name, c_time, c_day, c_prof, c_grade, c_credit FROM enroll WHERE s_id=?";
-
-pstmt = myConn.prepareStatement(mySQL);
-pstmt.setInt(1, s_id); 
-rs = pstmt.executeQuery();
-
-if (rs == null) {
-    System.out.println("enroll 없우면 ...~ ");
-} else {
-    while (rs.next()){
-    int c_id = rs.getInt("c_id");
-    int c_no = rs.getInt("c_no");
-    String c_name = rs.getString("c_name");
-    int c_time = rs.getInt("c_time");
-    int c_day = rs.getInt("c_day");
-    String c_prof = rs.getString("c_prof");
-    int c_grade = rs.getInt("c_grade");
-    int c_credit = rs.getInt("c_credit");
-    
+   String session_id = (String) session.getAttribute("id");
+   if (session_id==null) response.sendRedirect("login.jsp"); 
 %>
-            <tr>
-                <td class="list-col"><%=c_id%></td>
-                <td class="list-col"><%=c_no%></td>
-                <td class="list-col"><%=c_name%></td>
-                <td class="list-col"><%=c_day + c_time%></td>
-                <td class="list-col"><%=c_prof%></td>
-                <td class="list-col"><%=c_grade%></td>
-                <td class="list-col"><%=c_credit%></td>
-                <td class="list-col"><a href="delete_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>">
-                <button>취소</button></a></td>
-            </tr>
-            <% }} %>
-        </tbody>
-    </table>
+
+   <table width="75%" align="center" bgcolor="#FFFF99" border>
+      <thead>
+         <tr>
+            <td align="center"><b>과목번호</b></td>
+            <td align="center"><b>과목명</b></td>
+            <td align="center"><b>분반</b></td>
+            <td align="center"><b>학점</b></td>
+            <td align="center"><b>담당 교수</b></td>
+            <td align="center"><b>강의 요일</b></td>
+            <td align="center"><b>강의 시간</b></td>
+            <td align="center"><b>해당 년도</b></td>
+            <td align="center"><b>해당 학기</b></td>
+            <td align="center"><b>수강신청상태</b></td>
+         </tr>
+      </thead>
+      
+      <tbody>
+
+<%
+   Statement stmt = null;
+   PreparedStatement pstmt = null;
+   String sql = null;
+   ResultSet resultSet = null;
+   
+   int s_id = Integer.parseInt(session_id);
+   System.out.println(s_id);
+   sql = "SELECT c_id, c_name, c_no, c_credit, c_prof, c_day, c_time, e_year, e_sem FROM enroll WHERE s_id=?";
+   
+   pstmt = myConn.prepareStatement(sql);
+   pstmt.setInt(1, s_id); 
+   resultSet = pstmt.executeQuery();
+
+   if(resultSet == null) 
+   {
+      System.out.println("enroll 수강신청 과목 없음");
+%>
+   <script>
+     alert("수강신청한 과목이 없습니다. 수강신청을 해주세요.");
+     location.href = "main.jsp";
+   </script>
+   <% 
+   } 
+   else
+   {
+      String dayString = null;
+      String timeString = null;
+      
+      while(resultSet.next())
+      {
+         int c_id = resultSet.getInt("c_id");
+         String c_name = resultSet.getString("c_name");
+         int c_no = resultSet.getInt("c_no");
+         float c_credit = resultSet.getInt("c_credit");
+         String c_prof = resultSet.getString("c_prof");
+         int c_day = resultSet.getInt("c_day");
+         int c_time = resultSet.getInt("c_time");
+         int e_year = resultSet.getInt("e_year");
+         int e_semester = resultSet.getInt("e_sem");
+         
+         if(c_day == 1) dayString = "월 ,수";
+         else if(c_day == 2) dayString = "화, 목";
+         else dayString = "금";
+         
+         if(c_time == 1) timeString = "9:00 ~ 10:15";
+         else if(c_time == 2) timeString = "10:30 ~ 11:45";
+         else if(c_time == 3) timeString = "12:00 ~ 13:15";
+         else if(c_time == 4) timeString = "13:30 ~ 14:45";
+         else if(c_time == 5) timeString = "15:00 ~ 16:15";
+         else if(c_time == 6) timeString = "16:30 ~ 17:45";
+         else timeString = "18:00 ~ 17:30";
+
+      
+   %>
+   <tr bgcolor="#FFFFFF">
+         <td><%=c_id%></td>
+         <td><%=c_name%></td>
+         <td><%=c_no%></td>
+         <td><%=c_credit%></td>
+         <td><%=c_prof%></td>
+         <td><%=dayString %></td>
+         <td><%=timeString%></td>
+         <td><%=e_year%></td>
+         <td><%=e_semester%></td>
+         <td><a href="delete_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>">
+                   <button>취소</button></a></td>
+   </tr>
+   <tbody>
+   <% 
+      }
+   }
+    pstmt.close();
+    myConn.close(); 
+   %>
+</table>
 </body>
 
 </html>
