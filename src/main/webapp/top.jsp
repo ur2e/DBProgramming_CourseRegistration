@@ -17,7 +17,7 @@ String user_name = (String) session.getAttribute("name");
 </tr>
 </table> --%>
 <head>
-    <link rel="stylesheet" href="../css/top.css">
+    <link rel="stylesheet" href="./css/top.css">
 </head>
 <body>
     <header>
