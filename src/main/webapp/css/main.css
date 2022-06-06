@@ -57,9 +57,13 @@ a {
 .student-table .student-content {
     background-color: #eff7fb;
     border: 1px solid #b3b3b3;
-    width: 150px;
+    width: 130px;
     text-align: right;
     padding-right: 7px;
+}
+
+.enroll_table {
+    margin-bottom: 10px;
 }
 
 .enroll_table, tr, td {
