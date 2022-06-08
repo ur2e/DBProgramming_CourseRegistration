@@ -19,6 +19,7 @@ IS
     nTotalCredit NUMBER := 0;
     nDup NUMBER := 0;
     nTime NUMBER := 0;
+        v_num COURSE.C_CRNT%TYPE;
     
     CURSOR Time_list(u_sid ENROLL.S_ID%TYPE, year ENROLL.e_year%TYPE, sem ENROLL.e_sem%TYPE, v_day ENROLL.c_day%TYPE, v_time ENROLL.c_time%TYPE) IS
        SELECT c_id
@@ -72,16 +73,28 @@ BEGIN
     INSERT INTO ENROLL VALUES (USER_S_ID, v_course.c_id, v_course.c_no, v_course.c_name, v_course.c_credit, v_course.c_prof,
                       v_course.c_day, v_course.c_time, v_course.c_grade, v_year, v_sem, v_state);
     
-    v_course.c_spare := NVL(v_course.c_spare, 0) -1;
-    IF (v_course.c_spare < 0) THEN
+
+    SELECT count(*)
+    INTO v_num
+    FROM ENROLL
+    WHERE c_id = USER_C_ID and c_no = USER_C_NO;
+
+    v_course.c_spare := v_course.c_max - v_num;
+
+    IF  (v_course.c_spare < 0) THEN
    	    v_course.c_spare := 0;
     END IF;      
-      
+
+    UPDATE COURSE
+    SET c_crnt = v_num, c_spare = v_course.c_spare
+    WHERE c_id = USER_C_ID and c_no = USER_C_NO;
+    
+    COMMIT;
     /* course 업데이트 */
-    v_course.c_crnt := NVL(v_course.c_crnt, 0) + 1;
-    UPDATE COURSE 
-    SET c_crnt = v_course.c_crnt, c_spare = v_course.c_spare
-    WHERE c_id = v_course.c_id and c_no = v_course.c_no; 
+   --  v_course.c_crnt := NVL(v_course.c_crnt, 0) + 1;
+   --  UPDATE COURSE 
+   --  SET c_crnt = v_course.c_crnt, c_spare = v_course.c_spare
+   --  WHERE c_id = v_course.c_id and c_no = v_course.c_no; 
       
     result := '수강신청 등록이 완료되었습니다.';
 
