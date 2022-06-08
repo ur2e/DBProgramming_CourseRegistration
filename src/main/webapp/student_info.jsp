@@ -91,5 +91,8 @@ if(rs.next()) {
         </table>
     </div>
 
-    <% } %>
+    <% } 
+    pstmt.close();
+    myConn.close();
+    %>
 </body>

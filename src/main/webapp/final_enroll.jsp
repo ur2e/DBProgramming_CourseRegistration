@@ -36,9 +36,9 @@
 </script>
 
 <body>
-    <div align="outer-box" class="outer-box">
+<div align="outer-box" class="outer-box">
         <div class="top-box">수강 조회</div>
-    </div>
+</div>
 <div class="content-box" id="enroll">
    <div class="content-title">수강신청결과조회</div>
    <hr>
@@ -63,7 +63,7 @@ String mySQL_UPDATE = null;
 String mySQL_COMMIT = null;
 ResultSet resultSet = null;
 String e_state_data = "확정";
-mySQL_SELECT = "SELECT * FROM (SELECT e.c_id, e.c_no, e.c_name, e.s_id, s_name, e.c_prof, c.c_credit, c.c_day, c.c_time, DENSE_RANK() OVER (PARTITION BY e.c_id, e.c_no ORDER BY s.s_grade desc, s.last_credit desc, s.last_score desc) RANK, c_max FROM ENROLL e , STUDENTS s, COURSE c WHERE e.s_id = s.s_id and (e.c_id = c.c_id and e.c_no = c.c_no) ORDER BY c_name, rank) WHERE RANK <= 1";
+mySQL_SELECT = "SELECT * FROM ordered_data WHERE RANK <= 1";
 mySQL_UPDATE = "UPDATE ENROLL SET e_state = '확정' WHERE s_id=?";
 myConn.setAutoCommit(false);
 pstmt = myConn.prepareStatement(mySQL_SELECT);
@@ -74,7 +74,7 @@ if(!resultSet.isBeforeFirst())
 %>
    <tr>
       <td class="enroll_content" colspan=10>
-         <img src="../image/warning.jfif" height="15px"> 해당 테이블에 데이터가 없습니다.
+         <img src="./image/warning.jfif" height="15px"> 해당 테이블에 데이터가 없습니다.
       </td>
    </tr>
 
@@ -132,7 +132,6 @@ else
 }
 myConn.setAutoCommit(true);
 pstmt.close();
-
 %>
 </table>
 </div>

@@ -1,4 +1,3 @@
-/*SYSDATE -> 학기 추출*/
 CREATE OR REPLACE FUNCTION Date2EnrollSemester(dDate IN DATE)
 RETURN NUMBER
 IS
