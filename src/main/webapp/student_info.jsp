@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
 
 </head>
 
@@ -88,7 +88,7 @@ if(rs.next()) {
                         수강가능학점:
                     </td>
                     <td>
-                        <div class="student-content">18</div>
+                        <div class="student-content">12</div>
                     </td>
                 </tr>
             </tbody>
