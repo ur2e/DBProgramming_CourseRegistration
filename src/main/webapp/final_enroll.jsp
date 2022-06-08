@@ -9,6 +9,36 @@
 <head>
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
+<script>
+    const open_date = new Date('2022-06-06 13:30:00'); 
+    let today = getToday();
+
+    if( open_date < today){
+    } else {
+        alert("수강신청 결과조회 기간이 아닙니다.\n조회 기간: 2022년 6월 13일 13시 이후")
+        location.href="main.jsp";
+    }
+
+    function getToday() {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        var today = new Date();   
+        var hours = ('0' + today.getHours()).slice(-2); 
+        var minutes = ('0' + today.getMinutes()).slice(-2);
+        var seconds = ('0' + today.getSeconds()).slice(-2);
+        
+        var dateString = year + '-' + month  + '-' + day + " ";
+        var timeString = hours + ':' + minutes  + ':' + seconds;
+
+        var str2Date = new Date(dateString+timeString);
+        return str2Date;
+    }
+
+</script>
+
 <body>
 <div class="outer-box"></div>
 <div class="content-box" id="enroll">
