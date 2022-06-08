@@ -1,3 +1,11 @@
+col s_name for a20;  
+col c_name for a10;  
+col c_id for 999;
+col c_no for 999;
+col s_id for 999999;
+col rank for 999;
+col e_state for a6;
+
 SELECT * 
 FROM (
     SELECT e.c_id, e.c_no, e.c_name, e.s_id, s_name, e.c_prof, c.c_credit, c.c_day, c.c_time, c_max, DENSE_RANK() OVER (PARTITION BY e.c_id, e.c_no ORDER BY s.s_grade desc, s.last_credit desc, s.last_score desc) RANK 
