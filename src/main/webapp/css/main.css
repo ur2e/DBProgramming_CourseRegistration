@@ -16,7 +16,7 @@ body {
 .top-box {
     background-color: #dddddd;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 10px;
 }
  
@@ -32,6 +32,7 @@ body {
 
 .content-title {
     font-weight: bold;
+    font-size: 18px;
     margin-bottom: -4px;
 
 }
