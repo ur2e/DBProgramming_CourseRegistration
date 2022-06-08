@@ -43,6 +43,7 @@ body {
 .content-box hr {
     background-color: #487bb9;
     height: 1px;
+    margin-bottom: 15px;
 }
 
 a {
