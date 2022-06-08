@@ -36,12 +36,14 @@
 </script>
 
 <body>
-<div class="outer-box"></div>
+    <div align="outer-box" class="outer-box">
+        <div class="top-box">수강 조회</div>
+    </div>
 <div class="content-box" id="enroll">
    <div class="content-title">수강신청결과조회</div>
    <hr>
 
-   <table align="center" width="95%" class="enroll_table">
+   <table align="center" width="90%" class="enroll_table">
    <tr>
       <td class="enroll_h"><b>과목번호</b></td>
       <td class="enroll_h"><b>과목명</b></td>
@@ -130,7 +132,7 @@ else
 }
 myConn.setAutoCommit(true);
 pstmt.close();
-pstmt_update.close();
+
 %>
 </table>
 </div>
