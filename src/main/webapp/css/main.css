@@ -17,6 +17,7 @@ body {
     background-color: #dddddd;
     font-weight: bold;
     font-size: 24px;
+    margin-left: 10px;
     margin-bottom: 10px;
 }
  
@@ -24,6 +25,8 @@ body {
     background-color: white;
     margin-top: 10px;
     margin-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
     padding-top: 7px;
     padding-left: 20px;
     padding-right: 20px;
