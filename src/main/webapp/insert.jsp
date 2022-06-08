@@ -48,6 +48,7 @@
    int year = 0;
    int sem = 0;
 
+   myConn.setAutoCommit(false);
    cstmt1 = myConn.prepareCall("{? = call Date2EnrollYear(SYSDATE)}");
    cstmt1.registerOutParameter(1, java.sql.Types.INTEGER);  
    cstmt2 = myConn.prepareCall("{? = call Date2EnrollSemester(SYSDATE)}");
@@ -55,8 +56,10 @@
    
    try {
       cstmt1.execute();
+      myConn.commit();
       year = cstmt1.getInt(1);
       cstmt2.execute();
+      myConn.commit();
       sem = cstmt2.getInt(1);
    } catch(SQLException e){
       System.err.println("SQLException: " + e.getMessage());
@@ -69,6 +72,7 @@
    pstmt.setInt(2, year);
    pstmt.setInt(3, sem);
    rs = pstmt.executeQuery();
+   myConn.commit();
    
    if (rs != null) {
       String dayString = null;
@@ -114,16 +118,17 @@
             <td class="enroll_content"><%=c_spare%></td>
             <td class="enroll_content"><a href="insert_verify.jsp?s_id=<%=s_id%>&c_id=<%=c_id%>&c_no=<%=c_no%>">
             <button>신청</button></a></td>
-		</tr>
+	   </tr>
    </tbody>
         
    <% 
          }
    }
-      cstmt1.close();
-      cstmt2.close();
-      pstmt.close();
-      myConn.close(); 
+   myConn.setAutoCommit(true);
+   pstmt.close();
+   cstmt1.close();
+   cstmt2.close();
+   myConn.close(); 
    %>
 
     </table>

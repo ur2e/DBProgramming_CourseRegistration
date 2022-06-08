@@ -13,13 +13,11 @@
 <script>
     const open_date = new Date('2022-06-06 13:30:00'); 
     let today = getToday();
-
     if( open_date < today){
     } else {
         alert("수강신청 결과조회 기간이 아닙니다.\n조회 기간: 2022년 6월 13일 13시 이후")
         location.href="main.jsp";
     }
-
     function getToday() {
         var today = new Date();
         var year = today.getFullYear();
@@ -32,11 +30,9 @@
         
         var dateString = year + '-' + month  + '-' + day + " ";
         var timeString = hours + ':' + minutes  + ':' + seconds;
-
         var str2Date = new Date(dateString+timeString);
         return str2Date;
     }
-
 </script>
 
 <body>
@@ -65,16 +61,12 @@ String mySQL_UPDATE = null;
 String mySQL_COMMIT = null;
 ResultSet resultSet = null;
 String e_state_data = "확정";
-
 mySQL_SELECT = "SELECT * FROM (SELECT e.c_id, e.c_no, e.c_name, e.s_id, s_name, e.c_prof, c.c_credit, c.c_day, c.c_time, DENSE_RANK() OVER (PARTITION BY e.c_id, e.c_no ORDER BY s.s_grade desc, s.last_credit desc, s.last_score desc) RANK, c_max FROM ENROLL e , STUDENTS s, COURSE c WHERE e.s_id = s.s_id and (e.c_id = c.c_id and e.c_no = c.c_no) ORDER BY c_name, rank) WHERE RANK <= 1";
-
 mySQL_UPDATE = "UPDATE ENROLL SET e_state = '확정' WHERE s_id=?";
-
 myConn.setAutoCommit(false);
 pstmt = myConn.prepareStatement(mySQL_SELECT);
 resultSet = pstmt.executeQuery();
 myConn.commit();
-
 if(!resultSet.isBeforeFirst())
 {
 %>
@@ -104,7 +96,6 @@ else
         int c_time = resultSet.getInt("c_time");
         pstmt_update = myConn.prepareStatement(mySQL_UPDATE);
         pstmt_update.setInt(1, s_id); 
-
         try{
             pstmt_update.executeUpdate();
             myConn.commit();
@@ -122,7 +113,6 @@ else
         else if(c_time == 5) timeString = "15:00 ~ 16:15";
         else if(c_time == 6) timeString = "16:30 ~ 17:45";
         else timeString = "18:00 ~ 17:30";
-
         String e_state = e_state_data;
         courseTimeString = dayString + " " + timeString;
     %>

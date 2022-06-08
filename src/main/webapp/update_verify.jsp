@@ -16,9 +16,7 @@
    String session_id = (String) session.getAttribute("id");
    String userPassword = request.getParameter("userPassword");
    int s_id = Integer.parseInt(session_id);
-   System.out.println(s_id);
-   System.out.println(userPassword);
-   
+
    mySQL = "update students set s_pwd= '" + userPassword + "' where s_id = '" + s_id + "'";
    
    try {

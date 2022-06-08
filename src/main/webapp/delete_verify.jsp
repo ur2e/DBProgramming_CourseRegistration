@@ -10,21 +10,24 @@
 int s_id = Integer.parseInt(request.getParameter("s_id"));
 int c_id = Integer.parseInt(request.getParameter("c_id"));
 
-/**
- * DELETE_ENROLL(IN s_id, IN c_id, OUT c_name);
- */
-
 CallableStatement cstmt = null;
 String mySQL = null;
 
+myConn.setAutoCommit(false);
 mySQL = "{call DELETE_ENROLL(?,?,?)}";
+
 cstmt = myConn.prepareCall(mySQL);
 cstmt.setInt(1,s_id);
 cstmt.setInt(2,c_id);
 cstmt.registerOutParameter(3, java.sql.Types.VARCHAR);	
 cstmt.execute();
-String result = cstmt.getString(3);
+myConn.commit();
 
+String result = cstmt.getString(3);
+myConn.setAutoCommit(true);
+
+cstmt.close();
+myConn.close();
 %>
 
 <script>

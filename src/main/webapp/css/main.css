@@ -43,7 +43,6 @@ body {
 .content-box hr {
     background-color: #487bb9;
     height: 1px;
-    margin-bottom: 15px;
 }
 
 a {
@@ -154,6 +153,7 @@ a {
     background-color: #a0a9b4;
     padding: 5px;
     height: 30px;
+    width: 40px;
 }
 
 .cancel-btn:hover {

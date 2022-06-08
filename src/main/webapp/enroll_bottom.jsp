@@ -9,22 +9,29 @@
 </head>
 <%
 String session_id = (String) session.getAttribute("id");
+
 PreparedStatement pstmt = null;
 String sql = null;
 ResultSet resultSet = null;
+
 int s_id = Integer.parseInt(session_id);
 int total_cnt, sum_credit;
+
 sql = "SELECT COUNT(c_id) as total_cnt, SUM(c_credit) as sum_credit FROM enroll WHERE s_id=?";
 pstmt = myConn.prepareStatement(sql);
 pstmt.setInt(1, s_id);
 resultSet = pstmt.executeQuery();
+
 if(resultSet.next()){
    total_cnt = resultSet.getInt("total_cnt");
    sum_credit = resultSet.getInt("sum_credit");
-} else{
-   total_cnt = 0;
-   sum_credit = 0;
+} else {
+  total_cnt = 0;
+  sum_credit = 0;
 }
+
+pstmt.close();
+myConn.close();
 %>
 
 <body>

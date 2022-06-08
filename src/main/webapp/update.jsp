@@ -25,7 +25,7 @@
       </table>
       <div align="center">
          <input class="update-btn" type="SUBMIT" name="Submit" value="수정">
-         <a href="main.jsp"><button class="cancel-btn">취소</button></a>
+         <input class="cancel-btn" value="취소" onclick="history.back(-1);">
       </div>
    </form>
    </div>

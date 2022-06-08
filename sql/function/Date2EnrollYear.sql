@@ -1,20 +1,3 @@
-/*
-[Date2EnrollYear]
-    IN 파라미터
-        p1: 오늘 날짜
-    리턴 결과
-        숫자형
-        수강신청 하는 년도
-    9~12 : 다음 년도
-    1~8: 해당 년도
-*/
-
-/*
-    VAR month NUMBER;
-    month := Date2EnrollYear(SYSDATE)
-    print month;
-*/ 
-
 CREATE OR REPLACE FUNCTION Date2EnrollYear(dDate IN DATE)
 RETURN NUMBER
 IS
@@ -31,8 +14,6 @@ BEGIN
 	
 	END IF;
 	
---	DBMS_OUTPUT.PUT_LINE(v_month || 'and' || v_year);
 	RETURN v_year;
 
 END;
-

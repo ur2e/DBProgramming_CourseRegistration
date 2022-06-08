@@ -7,8 +7,8 @@
 
   String driver = "oracle.jdbc.driver.OracleDriver";
   String url = "jdbc:oracle:thin:@localhost:1521:xe";
-  String user = "db1811498";
-  String password = "oracle";
+  String user = "1814516";
+  String password = "ss2";
   
   Class.forName(driver);
   myConn = DriverManager.getConnection(url, user, password);

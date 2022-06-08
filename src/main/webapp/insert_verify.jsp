@@ -16,14 +16,18 @@
 	 */
 	CallableStatement cstmt = null;
 	String result = null;
+	myConn.setAutoCommit(false);
+	
 	cstmt = myConn.prepareCall("{call INSERT_ENROLL(?,?,?,?)}");
 	cstmt.setInt(1,s_id);
 	cstmt.setInt(2,c_id);
 	cstmt.setInt(3,c_no);
 	cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);	
 	
+	
 	try{
 		cstmt.execute();
+		myConn.commit();
 		result = cstmt.getString(4);
 	%>
 	<script>
@@ -33,8 +37,9 @@
 	
 	<%
 	} catch (SQLException e){
-		System.err.println("SQLException: " + e.getMessage());
+		//System.err.println("SQLException: " + e.getMessage());
 	}
+	myConn.setAutoCommit(true);
 
 	cstmt.close();
 %>

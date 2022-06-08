@@ -4,7 +4,6 @@ String log;
 if (session_id == null)
 log = "<a href=login.jsp>로그인</a>";
 else log = "<a href=logout.jsp>로그아웃</a>"; 
-
 String user_name = (String) session.getAttribute("name");
 %>
 <head>

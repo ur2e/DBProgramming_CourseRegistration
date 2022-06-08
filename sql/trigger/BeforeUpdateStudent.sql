@@ -8,6 +8,11 @@ DECLARE
    nBlank NUMBER;    --공백 개수
 
 BEGIN
+/* NULL 값 처리*/
+IF( :new.s_pwd is null ) THEN 
+   RAISE null_value;
+END IF ;
+
 /* 4자리 이하 */
 IF (LENGTH(:new.s_pwd) < 4) THEN
    RAISE underflow_length;
@@ -17,11 +22,6 @@ END IF;
 IF (:new.s_pwd LIKE '% %') THEN 
    RAISE invalid_value;
 END IF;
-
-/* NULL 값 처리*/
-IF( :new.s_pwd is null ) THEN 
-   RAISE null_value;
-END IF ;
 
 /* 정상 동작 */
 UPDATE students s 

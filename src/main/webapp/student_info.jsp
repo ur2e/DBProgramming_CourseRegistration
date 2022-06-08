@@ -16,14 +16,11 @@ String session_id = (String) session.getAttribute("id");
 PreparedStatement pstmt = null;
 String mySQL = null;
 ResultSet rs = null;
-
 int s_id = Integer.parseInt(session_id);
 mySQL = "SELECT s_id, s_major, s_name, s_grade, last_credit, last_score FROM students WHERE s_id=?";
-
 pstmt = myConn.prepareStatement(mySQL);
 pstmt.setInt(1, s_id);
 rs = pstmt.executeQuery();
-
 if(rs.next()) {
     int student_id = rs.getInt("s_id");
     String s_major = rs.getString("s_major");
@@ -31,7 +28,6 @@ if(rs.next()) {
     int s_grade = rs.getInt("s_grade");
     int last_credit = rs.getInt("last_credit");
     float last_score = rs.getFloat("last_score");
-
 %>
 
 <body>

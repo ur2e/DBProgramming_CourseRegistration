@@ -1,22 +1,4 @@
-/*
-[Date2EnrollSemester]
-    IN ÆÄ¶ó¹ÌÅÍ
-        p1: ¿À´Ã ³¯Â¥
-    ¸®ÅÏ °á°ú
-        ¼ýÀÚÇü
-        ¼ö°­½ÅÃ»ÇÏ´Â ÇÐ±â ¸®ÅÏ
-    9~12, 1~2 : 1ÇÐ±â
-    3~8: 2ÇÐ±â
-*/
-
-/*
-    Set ServerOutput on;
-    VAR sem NUMBER;
-    EXECUTE :sem := Date2EnrollSemester(SYSDATE)
-    PRINT sem;
-*/
-
-/*SYSDATE -> ÇÐ±â ÃßÃâ*/
+/*SYSDATE -> í•™ê¸° ì¶”ì¶œ*/
 CREATE OR REPLACE FUNCTION Date2EnrollSemester(dDate IN DATE)
 RETURN NUMBER
 IS
@@ -32,7 +14,6 @@ BEGIN
 	v_sem := 1;
 	END IF;
 
---	DBMS_OUTPUT.PUT_LINE(v_month);
 	RETURN v_sem;
 END;
 /

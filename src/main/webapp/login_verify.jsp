@@ -3,7 +3,6 @@
 <%@ include file="dbconfig.jsp" %>
 
 <%
-Statement stmt = null;
 PreparedStatement pstmt = null;
 String sql = null;
 
@@ -31,6 +30,6 @@ if (rs.next()) {
 
 <%
   }
-// stmt.close();
-// myConn.close();
+pstmt.close();
+myConn.close();
 %>
