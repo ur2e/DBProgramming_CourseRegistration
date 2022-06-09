@@ -82,20 +82,12 @@ if(!resultSet.isBeforeFirst())
 }
 else
 {
-    String dayString = null;
-    String timeString = null;
-    String courseTimeString = null;
+
     while(resultSet.next())
     {
         
         int s_id = resultSet.getInt("s_id");
-        int c_id = resultSet.getInt("c_id");
-        String c_name = resultSet.getString("c_name");
-        int c_no = resultSet.getInt("c_no");
-        int c_credit = resultSet.getInt("c_credit");
-        String c_prof = resultSet.getString("c_prof");
-        int c_day = resultSet.getInt("c_day");
-        int c_time = resultSet.getInt("c_time");
+
         pstmt_update = myConn.prepareStatement(mySQL_UPDATE);
         pstmt_update.setInt(1, s_id); 
         try{
@@ -104,6 +96,42 @@ else
         } catch(Exception e){
             System.err.println("SQLException: " + e.getMessage());
         }
+    }
+}
+String mySQL_PRINT = "SELECT * FROM ENROLL WHERE s_id=? and e_state='확정'";
+PreparedStatement pstmt_print = null;
+ResultSet rs_print = null;
+
+
+int user_id = Integer.parseInt(session_id);
+pstmt_print = myConn.prepareStatement(mySQL_PRINT);
+pstmt_print.setInt(1, user_id);
+rs_print = pstmt_print.executeQuery();
+
+if(!rs_print.isBeforeFirst())
+{
+%>
+   <tr>
+      <td class="enroll_content" colspan=10>
+         <img src="./image/warning.jfif" height="15px"> 해당 테이블에 데이터가 없습니다.
+      </td>
+   </tr>
+
+<%
+}
+else
+{ 
+    while(rs_print.next()) {  
+        String dayString = null;
+        String timeString = null;
+        String courseTimeString = null;
+        int c_id = rs_print.getInt("c_id");
+        String c_name = rs_print.getString("c_name");
+        int c_no = rs_print.getInt("c_no");
+        int c_credit = rs_print.getInt("c_credit");
+        String c_prof = rs_print.getString("c_prof");
+        int c_day = rs_print.getInt("c_day");
+        int c_time = rs_print.getInt("c_time");
         
         if(c_day == 1) dayString = "월 ,수";
         else if(c_day == 2) dayString = "화, 목";
@@ -128,8 +156,9 @@ else
         <td class="enroll_content"><%=e_state%></td>
     </tr>
 <%
-   }
 }
+}
+
 myConn.setAutoCommit(true);
 pstmt.close();
 %>
